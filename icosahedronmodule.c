@@ -100,8 +100,7 @@ static PyObject *icosahedron(PyObject *self, PyObject *args, PyObject *kwargs)
 	  } else if (distance < face_distance - half_edge_thickness) {
 	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 1.;
 	  } else {
-	    //out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 1.-(face_distance-half_edge_thickness-distance);
-	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 0.5 + (distance - face_distance) / edge_thickness;
+	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 0.5 + (face_distance - distance) / edge_thickness;
 	  }
 	    
 	} else if ((projected_x-center_x)*normal2_x + (projected_y-center_y)*normal2_y +
@@ -112,8 +111,7 @@ static PyObject *icosahedron(PyObject *self, PyObject *args, PyObject *kwargs)
 	  } else if (distance < face_distance - half_edge_thickness) {
 	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 1.;
 	  } else {
-	    //out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 1.-(face_distance-half_edge_thickness-distance);
-	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 0.5 + (distance - face_distance) / edge_thickness;
+	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 0.5 + (face_distance - distance) / edge_thickness;
 	  }
 
 	} else if ((projected_x-center_x)*normal3_x + (projected_y-center_y)*normal3_y +
@@ -124,8 +122,7 @@ static PyObject *icosahedron(PyObject *self, PyObject *args, PyObject *kwargs)
 	  } else if (distance < face_distance - half_edge_thickness) {
 	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 1.;
 	  } else {
-	    //out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 1.-(face_distance-half_edge_thickness-distance);
-	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 0.5 + (distance - face_distance) / edge_thickness;
+	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 0.5 + (face_distance - distance) / edge_thickness;
 	  }
 
 	} else {
@@ -135,8 +132,7 @@ static PyObject *icosahedron(PyObject *self, PyObject *args, PyObject *kwargs)
 	  } else if (distance < face_distance - half_edge_thickness) {
 	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 1.;
 	  } else {
-	    //out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 1.-(face_distance-half_edge_thickness-distance);
-	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 0.5 + (distance - face_distance) / edge_thickness;
+	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 0.5 + (face_distance - distance) / edge_thickness;
 	  }
 	}
       }
@@ -283,8 +279,7 @@ static PyObject *icosahedron_rot(PyObject *self, PyObject *args, PyObject *kwarg
 	  } else if (distance < face_distance - half_edge_thickness) {
 	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 1.;
 	  } else {
-	    //out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 1.-(face_distance-half_edge_thickness-distance);
-	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 0.5 + (distance - face_distance) / edge_thickness;
+	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 0.5 + (face_distance - distance) / edge_thickness;
 	  }
 	    
 	} else if ((projected_x-center_x)*normal2_x + (projected_y-center_y)*normal2_y +
@@ -295,8 +290,7 @@ static PyObject *icosahedron_rot(PyObject *self, PyObject *args, PyObject *kwarg
 	  } else if (distance < face_distance - half_edge_thickness) {
 	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 1.;
 	  } else {
-	    //out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 1.-(face_distance-half_edge_thickness-distance);
-	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 0.5 + (distance - face_distance) / edge_thickness;
+	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 0.5 + (face_distance - distance) / edge_thickness;
 	  }
 
 	} else if ((projected_x-center_x)*normal3_x + (projected_y-center_y)*normal3_y +
@@ -307,8 +301,7 @@ static PyObject *icosahedron_rot(PyObject *self, PyObject *args, PyObject *kwarg
 	  } else if (distance < face_distance - half_edge_thickness) {
 	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 1.;
 	  } else {
-	    //out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 1.-(face_distance-half_edge_thickness-distance);
-	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 0.5 + (distance - face_distance) / edge_thickness;
+	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 0.5 + (face_distance - distance) / edge_thickness;
 	  }
 
 	} else {
@@ -318,8 +311,7 @@ static PyObject *icosahedron_rot(PyObject *self, PyObject *args, PyObject *kwarg
 	  } else if (distance < face_distance - half_edge_thickness) {
 	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 1.;
 	  } else {
-	    //out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 1.-(face_distance-half_edge_thickness-distance);
-	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 0.5 + (distance - face_distance) / edge_thickness;
+	    out[x_pixel*image_side*image_side + y_pixel*image_side + z_pixel] = 0.5 + (face_distance - distance) / edge_thickness;
 	  }
 	}
       }
