@@ -174,9 +174,17 @@ static PyObject *icosahedron_rot(PyObject *self, PyObject *args, PyObject *kwarg
     return NULL;
   }
 
-  const double euler_1 = PyFloat_AsDouble(PySequence_Fast_GET_ITEM(rotation_sequence, 0));
-  const double euler_2 = PyFloat_AsDouble(PySequence_Fast_GET_ITEM(rotation_sequence, 1));
-  const double euler_3 = PyFloat_AsDouble(PySequence_Fast_GET_ITEM(rotation_sequence, 2));
+  PyObject *seq_1 = PySequence_Fast_GET_ITEM(rotation_sequence, 0);
+  PyObject *seq_2 = PySequence_Fast_GET_ITEM(rotation_sequence, 1);
+  PyObject *seq_3 = PySequence_Fast_GET_ITEM(rotation_sequence, 2);
+  const double euler_1 = PyFloat_AsDouble(seq_1);
+  const double euler_2 = PyFloat_AsDouble(seq_2);
+  const double euler_3 = PyFloat_AsDouble(seq_3);
+  if (PyErr_Occurred()) {
+    PyErr_SetString(PyExc_ValueError, "Rotation must be sequence of 3 euler angles (floats).");
+    return NULL;
+  }
+    
   const double rotm_11 = cos(euler_2)*cos(euler_3);
   const double rotm_12 = -cos(euler_1)*sin(euler_3)+sin(euler_1)*sin(euler_2)*cos(euler_3);
   const double rotm_13 = sin(euler_1)*sin(euler_3)+cos(euler_1)*sin(euler_2)*cos(euler_3);
