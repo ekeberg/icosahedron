@@ -156,13 +156,14 @@ static PyObject *icosahedron(PyObject *self, PyObject *args, PyObject *kwargs)
   double projected_x, projected_y, projected_z;
   double scalar_product, distance;
   double image_side_float = (double) image_side;
-  for (int x_pixel = 0; x_pixel < image_side; x_pixel++) {
+  int x_pixel, y_pixel, z_pixel;
+  for (x_pixel = 0; x_pixel < image_side; x_pixel++) {
     //x = fabs(((double)x_pixel - image_side_float/2. + 0.5));
     no_rot_x = ((double)x_pixel - image_side_float/2. + 0.5);
-    for (int y_pixel = 0; y_pixel < image_side; y_pixel++) {
+    for (y_pixel = 0; y_pixel < image_side; y_pixel++) {
       //y = fabs(((double)y_pixel - image_side_float/2. + 0.5));
       no_rot_y = ((double)y_pixel - image_side_float/2. + 0.5);
-      for (int z_pixel = 0; z_pixel < image_side; z_pixel++) {
+      for (z_pixel = 0; z_pixel < image_side; z_pixel++) {
 	//z = fabs(((double)z_pixel - image_side_float/2. + 0.5));
 	no_rot_z = ((double)z_pixel - image_side_float/2. + 0.5);
 	
