@@ -3,6 +3,8 @@
 #include <math.h>
 #include <stdio.h>
 
+#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
+
 PyDoc_STRVAR(icosahedron__doc__, "icosahedron(array_side, radius, rotation)\n\nGenerate an icosahedron. Radius is given in pixels and is defined as the distance to the corners. Rotation should be tuple of three euler angles");
 static PyObject *icosahedron(PyObject *self, PyObject *args, PyObject *kwargs)
 {
@@ -96,8 +98,9 @@ static PyObject *icosahedron(PyObject *self, PyObject *args, PyObject *kwargs)
     }
   }
 
-  int out_dim[] = {image_side, image_side, image_side};
-  PyObject *out_array = (PyObject *)PyArray_FromDims(3, out_dim, NPY_FLOAT64);
+  npy_intp out_dim[] = {image_side, image_side, image_side};
+  //PyObject *out_array = (PyObject *)PyArray_FromDims(3, out_dim, NPY_FLOAT64);
+  PyObject *out_array = (PyObject *)PyArray_SimpleNew(3, out_dim, NPY_FLOAT64);
   double *out = PyArray_DATA(out_array);
 
   //double edge_thickness = 1./image_side;
