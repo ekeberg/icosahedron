@@ -17,7 +17,7 @@ static PyObject *icosahedron(PyObject *self, PyObject *args, PyObject *kwargs)
   if (!PyArg_ParseTupleAndKeywords(args, kwargs, "id|O", kwlist, &image_side, &radius, &rotation_obj)) {
     return NULL;
   }
-
+  
   if (image_side <= 0) {
     PyErr_SetString(PyExc_ValueError, "Image side must be > 0.");
     return NULL;
@@ -68,7 +68,7 @@ static PyObject *icosahedron(PyObject *self, PyObject *args, PyObject *kwargs)
       PyObject *seq_1 = PySequence_Fast_GET_ITEM(rotation_sequence, 0);
       PyObject *seq_2 = PySequence_Fast_GET_ITEM(rotation_sequence, 1);
       PyObject *seq_3 = PySequence_Fast_GET_ITEM(rotation_sequence, 2);
-      PyObject *seq_4 = PySequence_Fast_GET_ITEM(rotation_sequence, 2);
+      PyObject *seq_4 = PySequence_Fast_GET_ITEM(rotation_sequence, 3);
       double quat_1 = PyFloat_AsDouble(seq_1);
       double quat_2 = PyFloat_AsDouble(seq_2);
       double quat_3 = PyFloat_AsDouble(seq_3);
@@ -83,7 +83,7 @@ static PyObject *icosahedron(PyObject *self, PyObject *args, PyObject *kwargs)
       quat_2 /= quaternion_norm;
       quat_3 /= quaternion_norm;
       quat_4 /= quaternion_norm;
-      
+
       rotm_11 = quat_1*quat_1 + quat_2*quat_2 - quat_3*quat_3 - quat_4*quat_4;
       rotm_12 = 2.*quat_2*quat_3 - 2.*quat_1*quat_4;
       rotm_13 = 2.*quat_2*quat_4 + 2.*quat_1*quat_3;
