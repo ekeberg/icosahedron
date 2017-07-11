@@ -5,6 +5,11 @@
 
 #define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 
+#if PY_MAJOR_VERSION >= 3
+#define IS_PY3
+#endif
+
+
 PyDoc_STRVAR(icosahedron__doc__, "icosahedron(array_side, radius, rotation)\n\nGenerate an icosahedron. Radius is given in pixels and is defined as the distance to the corners. Rotation should be tuple of three euler angles");
 static PyObject *icosahedron(PyObject *self, PyObject *args, PyObject *kwargs)
 {
@@ -240,10 +245,43 @@ static PyMethodDef IcosahedronMethods[] = {
   {NULL, NULL, 0, NULL}
 };
 
-PyMODINIT_FUNC initicosahedron(void)
+#ifdef IS_PY3
+static struct PyModuleDef moduledef = {
+  PyModuleDef_HEAD_INIT,
+  "icosahedron",      /* m_name */
+  "Create icosahedron density map.", /* m_doc */
+  -1,          /* m_size */
+  IcosahedronMethods, /* m_methods */
+  NULL,        /* m_reload */
+  NULL,        /* m_traverse */
+  NULL,        /* m_clear */
+  NULL,        /* m_free */
+};
+#endif
+
+#ifdef IS_PY3
+  PyMODINIT_FUNC PyInit_icosahedron(void)
+#else
+  PyMODINIT_FUNC initicosahedron(void)
+#endif
 {
   import_array();
-  PyObject *m = Py_InitModule3("icosahedron", IcosahedronMethods, "Create icosahedron density map");
-  if (m == NULL)
-    return;
+
+  #ifdef IS_PY3
+    PyObject *module = PyModule_Create(&moduledef);
+  #else
+    PyObject *module = Py_InitModule3("icosahedron", IcosahedronMethods, "Create icosahedron density map");
+  #endif
+
+  if (module == NULL) {
+    #ifdef IS_PY3
+      return NULL;
+    #else
+      return;
+    #endif
+  }
+  
+  #ifdef IS_PY3
+    return module;
+  #endif
 }
