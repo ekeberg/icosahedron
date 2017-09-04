@@ -245,43 +245,29 @@ static PyMethodDef IcosahedronMethods[] = {
   {NULL, NULL, 0, NULL}
 };
 
-#ifdef IS_PY3
-static struct PyModuleDef moduledef = {
-  PyModuleDef_HEAD_INIT,
-  "icosahedron",      /* m_name */
-  "Create icosahedron density map.", /* m_doc */
-  -1,          /* m_size */
-  IcosahedronMethods, /* m_methods */
-  NULL,        /* m_reload */
-  NULL,        /* m_traverse */
-  NULL,        /* m_clear */
-  NULL,        /* m_free */
-};
-#endif
 
 #ifdef IS_PY3
-  PyMODINIT_FUNC PyInit_icosahedron(void)
+  #define MOD_ERROR_VAL NULL
+  #define MOD_SUCCESS_VAL(val) val
+  #define MOD_INIT(name) PyMODINIT_FUNC PyInit_##name(void)
+  #define MOD_DEF(ob, name, doc, methods) \
+          static struct PyModuleDef moduledef = { \
+	    PyModuleDef_HEAD_INIT, name, doc, -1, methods, }; \
+	  ob = PyModule_Create(&moduledef);
 #else
-  PyMODINIT_FUNC initicosahedron(void)
+  #define MOD_ERROR_VAL
+  #define MOD_SUCCESS_VAL(val)
+  #define MOD_INIT(name) void init##name(void)
+  #define MOD_DEF(ob, name, doc, methods) \
+          ob = Py_InitModule3(name, methods, doc);
 #endif
+
+MOD_INIT(icosahedron)
 {
   import_array();
-
-  #ifdef IS_PY3
-    PyObject *module = PyModule_Create(&moduledef);
-  #else
-    PyObject *module = Py_InitModule3("icosahedron", IcosahedronMethods, "Create icosahedron density map");
-  #endif
-
-  if (module == NULL) {
-    #ifdef IS_PY3
-      return NULL;
-    #else
-      return;
-    #endif
-  }
-  
-  #ifdef IS_PY3
-    return module;
-  #endif
+  PyObject *module;
+  MOD_DEF(module, "icosahedron", "Create icosahedron density map.", IcosahedronMethods)
+  if (module == NULL)
+    return MOD_ERROR_VAL;
+  return MOD_SUCCESS_VAL(module);
 }
